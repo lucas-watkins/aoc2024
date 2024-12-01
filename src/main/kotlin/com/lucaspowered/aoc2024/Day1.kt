@@ -1,4 +1,4 @@
-package com.lucaspowered
+package com.lucaspowered.aoc2024
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -6,7 +6,7 @@ import kotlin.math.abs
 
 fun main() {
    val input = mutableListOf<List<String>>()
-    Files.readAllLines(Path.of("Day1.txt")).forEach {input.add(it.split("   "))}
+    Files.readAllLines(Path.of("inputs/Day1.txt")).forEach {input.add(it.split("   "))}
     val list1 = mutableListOf<Int>()
     val list2 = mutableListOf<Int>()
 
