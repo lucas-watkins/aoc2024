@@ -4,7 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.math.abs
 
-fun main() {
+fun day1() {
    val input = mutableListOf<List<String>>()
     Files.readAllLines(Path.of("inputs/Day1.txt")).forEach {input.add(it.split("   "))}
     val list1 = mutableListOf<Int>()
