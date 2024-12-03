@@ -39,16 +39,15 @@ private fun List<Int>.exclude(index: Int): List<Int> {
 }
 
 private fun isSafe(list: List<Int>, range: IntRange = 1..3, counter: Int = -1, dampener: Boolean = false): Boolean {
-    val l = list
-    if ((l.exclude(counter).isIncreasing() || l.exclude(counter).isDecreasing()) && l.exclude(counter)
+    if ((list.exclude(counter).isIncreasing() || list.exclude(counter).isDecreasing()) && list.exclude(counter)
             .filterIndexed { idx, _ ->
-                (idx < l.exclude(counter).lastIndex && !range.contains(
+                (idx < list.exclude(counter).lastIndex && !range.contains(
                     abs(
-                        l.exclude(counter)[idx] - l.exclude(counter)[idx + 1]
+                        list.exclude(counter)[idx] - list.exclude(counter)[idx + 1]
                     )
                 ))
             }.isEmpty()
     ) return true
     if (!dampener) return false
-    return if (counter == l.lastIndex) false else isSafe(list = l, counter = counter + 1, dampener = dampener)
+    return if (counter == list.lastIndex) false else isSafe(list = list, counter = counter + 1, dampener = dampener)
 }
