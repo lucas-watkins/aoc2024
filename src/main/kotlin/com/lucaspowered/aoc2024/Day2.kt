@@ -3,7 +3,7 @@ package com.lucaspowered.aoc2024
 import java.nio.file.*
 import kotlin.math.abs
 
-fun main() = day2()
+//fun main() = day2()
 
 fun day2() {
     val input = Files.readAllLines(Path.of("inputs/Day2.txt")).map { i -> i.split(" ").map { it.toInt() } }
@@ -34,7 +34,6 @@ private fun List<Int>.isDecreasing(): Boolean {
 }
 
 private fun List<Int>.exclude(index: Int): List<Int> {
-    if (index == -1) return this
     return this.filterIndexed { idx, _ -> idx != index }
 }
 
