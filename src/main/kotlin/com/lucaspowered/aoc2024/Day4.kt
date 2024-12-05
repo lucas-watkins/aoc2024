@@ -5,46 +5,62 @@ import java.nio.file.*
 fun main() = day4()
 
 fun day4() {
-    val sb = StringBuilder()
     //val input = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX"
     //val input = "....XXMAS.\n.SAMXMS...\n...S..A...\n..A.A.MS.X\nXMASAMX.MM\nX.....XA.A\nS.S.S.S.SS\n.A.A.A.A.A\n..M.M.M.MM\n.X.X.XMASX"
-    val xmasRegex = Regex("XMAS")
     val input = Files.readAllLines(Path.of("inputs/Day4.txt")).joinToString("\n")
-    sb.append(input.replace("\n", ""))
-    val array = input.split('\n').map{it.toCharArray()}.toTypedArray()
-    sb.append('.')
-    array.forEachIndexed{idx1, _ -> (0..array.lastIndex).forEachIndexed{idx2, _ -> sb.append(array[idx2][idx1])}}
-    sb.append('.')
-    array.diagonallyRight().forEach{r -> r.forEach {sb.append(it)}}
-    sb.append('.')
-    array.diagonallyLeft().forEach{l -> l.forEach {sb.append(it)}}
-    sb.append('.')
+    val array = input.split('\n').map{it.toCharArray()}
+    var found = 0
+    for (i in array.indices){
+        for (j in array[i].indices){
+            if (array[i][j] == 'X') {
+                // Down
+                if (i + 1 <= array.lastIndex && array[i + 1][j] == 'M')
+                    if (i + 2 <= array.lastIndex && array[i + 2][j] == 'A')
+                        if (i + 3 <= array.lastIndex && array[i + 3][j] == 'S')
+                            found++
 
-    println(xmasRegex.findAll(sb).count() +  xmasRegex.findAll(sb.reversed()).count())
-}
+                // Right
+                if (j + 1 <= array[i].lastIndex && array[i][j + 1] == 'M')
+                    if(j + 2 <= array[i].lastIndex && array[i][j + 2] == 'A')
+                        if(j+3 <= array[i].lastIndex && array[i][j + 3] == 'S')
+                            found++
 
-private fun Array<CharArray>.diagonallyLeft(): Array<Array<Char>> {
-    val result = mutableListOf<Array<Char>>()
-    result.addAll(this.diagonalLeftHalfSlice())
-    result.addAll(this.reversedArray().map{it.reversedArray()}.toTypedArray().diagonalLeftHalfSlice().map{it.reversedArray()}.toTypedArray().reversedArray().drop(1).toTypedArray())
-    return result.toTypedArray()
-}
+                // Left
+                if(j - 1 >= 0 && array[i][j - 1] == 'M')
+                    if(j - 2 >= 0 && array[i][j - 2] == 'A')
+                        if(j - 3 >= 0 && array[i][j - 3] == 'S')
+                            found++
+                // Up
+                if (i - 1 >= 0 && array[i-1][j] == 'M')
+                    if(i - 2 >= 0 && array[i - 2][j] == 'A')
+                        if (i - 3 >= 0 && array[i-3][j] == 'S')
+                            found++
 
-private fun Array<CharArray>.diagonalLeftHalfSlice(): Array<Array<Char>> {
-    val result = mutableListOf<Array<Char>>()
-    for (i in this.indices) {
-        val m = mutableListOf<Char>()
-        for (j in this[i].indices) {
-            if (j <= i)
-                m.add(this[i - j][j])
-            else
-                break
+                // Diagonal Right Down
+                if (i + 1 <= array.lastIndex && j + 1 <= array[i].lastIndex && array[i+1][j+1] == 'M')
+                    if (i + 2 <= array.lastIndex && j + 2 <= array[i].lastIndex && array[i+2][j+2] == 'A')
+                        if (i + 3 <= array.lastIndex && j + 3 <= array[i].lastIndex && array[i+3][j+3] == 'S')
+                            found++
+
+                // Diagonal Right Up
+                if (i - 1 >= 0 && j + 1 <= array[i].lastIndex && array[i - 1][j + 1] == 'M')
+                    if (i - 2 >= 0 && j + 2 <= array[i].lastIndex && array[i - 2][j + 2] == 'A')
+                        if (i - 3 >= 0 && j + 3 <= array[i].lastIndex && array[i - 3][j + 3] == 'S')
+                            found++
+
+                // Diagonal Left Down
+                if (i + 1 <= array.lastIndex && j - 1 >= 0 && array[i + 1][j - 1] == 'M')
+                    if (i + 2 <= array.lastIndex && j - 2 >= 0 && array[i + 2][j - 2] == 'A')
+                        if (i + 3 <= array.lastIndex && j - 3 >= 0 && array[i + 3][j - 3] == 'S')
+                            found++
+
+                // Diagonal Left Up
+                if (i - 1 >= 0 && j - 1 >= 0 && array[i - 1][j - 1] == 'M')
+                    if (i - 2 >= 0 && j - 2 >= 0 && array[i - 2][j - 2] == 'A')
+                        if (i - 3 >= 0 && j - 3 >= 0 && array[i - 3][j - 3] == 'S')
+                            found++
+            }
         }
-        result.add(m.toTypedArray())
     }
-    return result.toTypedArray()
-}
-
-private fun Array<CharArray>.diagonallyRight(): Array<Array<Char>> {
-    return this.map{it.reversedArray()}.toTypedArray().reversedArray().diagonallyLeft().map{it.reversedArray()}.toTypedArray()
+    println(found)
 }
