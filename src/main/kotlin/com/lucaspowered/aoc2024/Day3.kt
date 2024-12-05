@@ -4,7 +4,7 @@ import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
 
-fun main() = day3()
+//fun main() = day3()
 
 fun day3() {
      /*
