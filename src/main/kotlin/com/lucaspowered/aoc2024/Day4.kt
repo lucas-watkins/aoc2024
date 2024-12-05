@@ -2,7 +2,7 @@ package com.lucaspowered.aoc2024
 
 import java.nio.file.*
 
-fun main() = day4()
+//fun main() = day4()
 
 fun day4() {
     val input = Files.readAllLines(Path.of("inputs/Day4.txt")).joinToString("\n")
