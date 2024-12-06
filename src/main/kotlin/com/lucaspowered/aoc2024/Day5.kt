@@ -35,6 +35,7 @@ private fun Array<Array<String>>.getBadUpdates(): Array<Array<String>> {
     return ruleBreakers.toSet().toTypedArray()
 }
 
+// This algorithm is very inefficient but it works :)
 private fun Array<Array<String>>.correctUpdates() {
     this.forEach { i ->
         while (i.isBadUpdate()) {
@@ -65,10 +66,6 @@ private fun Array<String>.isBadUpdate(): Boolean {
         }
     }
     return false
-}
-
-private fun Array<String>.isGoodUpdate(): Boolean {
-    return !this.isBadUpdate()
 }
 
 private fun <T> Array<T>.swap(x: T, y: T) {
