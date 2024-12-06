@@ -4,7 +4,7 @@ import java.nio.charset.Charset
 import java.nio.file.*
 import kotlin.io.path.Path
 
-fun main() = day5()
+//fun main() = day5()
 private val input = Files.readAllBytes(Path("inputs/Day5.txt")).toString(Charset.defaultCharset())
 private val order = Regex("\\d+\\|\\d+").findAll(input).map { Pair(it.value.split('|')[0], it.value.split('|')[1]) }
 private val updates = input.split('\n').filter { it.contains(',') }.map { it.split(',').toTypedArray() }.toTypedArray()

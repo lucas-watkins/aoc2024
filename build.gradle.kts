@@ -6,7 +6,7 @@ plugins {
 group = "com.lucaspowered"
 version = "1.0-SNAPSHOT"
 
-val day = 5
+val day = 6
 application {
     mainClass = "com.lucaspowered.aoc2024.Day${day}Kt"
 }
