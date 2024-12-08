@@ -2,7 +2,7 @@ package com.lucaspowered.aoc2024
 
 import java.nio.file.*
 
-fun main() = day6()
+//fun main() = day6()
 
 private data class Pair(var i: Int, var j: Int)
 
